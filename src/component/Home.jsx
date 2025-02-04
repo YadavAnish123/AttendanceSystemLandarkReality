@@ -11,37 +11,42 @@ const Home = () => {
   return (
     <main className='bg-gray-100'>
     <div className="container mx-auto p-5 ">
-      {/* Filter section */}
-      <div className="flex gap-4 items-center mb-6 ">
-        <select className="px-4 py-2 border rounded-md text-sm font-sm   shadow-md  ">
-          <option value="anish">Anish</option>
-          <option value="price">Prince</option>
-        </select>
+     {/* Filter section */}
+<div className="flex flex-col sm:flex-row gap-4 items-center mb-6">
+  <select className="px-4 py-2 border rounded-md text-sm font-sm shadow-md w-full sm:w-auto">
+    <option value="anish">Anish</option>
+    <option value="price">Prince</option>
+  </select>
 
-        <label htmlFor="event-date" className="text-sm font-medium">From:</label>
-        <input
-          type="date"
-          id="from-date"
-          min="2025-02-01"
-          max="2025-12-31"
-          value="2025-02-01"
-          className="px-4 py-2 border rounded-md   shadow-md   text-sm font-sm"
-        />
+  <div className="flex items-center gap-2">
+    <label htmlFor="from-date" className="text-sm font-medium">From:</label>
+    <input
+      type="date"
+      id="from-date"
+      min="2025-02-01"
+      max="2025-12-31"
+      value="2025-02-01"
+      className="px-4 py-2 border rounded-md shadow-md text-sm font-sm"
+    />
+  </div>
 
-        <label htmlFor="event-date" className="text-sm font-medium">To:</label>
-        <input
-          type="date"
-          id="to-date"
-          min="2025-02-01"
-          max="2025-12-31"
-          value="2025-02-01"
-          className="px-4 py-2 border rounded-md   shadow-md  text-sm font-sm"
-        />
+  <div className="flex items-center gap-2">
+    <label htmlFor="to-date" className="text-sm font-medium">To:</label>
+    <input
+      type="date"
+      id="to-date"
+      min="2025-02-01"
+      max="2025-12-31"
+      value="2025-02-01"
+      className="px-4 py-2 border rounded-md shadow-md text-sm font-sm"
+    />
+  </div>
 
-        <button className="px-6 py-2 bg-orange-500  shadow-md border text-white  text-sm font-medium rounded-md hover:bg-orange-600 transition duration-300">
-          Filter
-        </button>
-      </div>
+  <button className="px-6 py-2 bg-orange-500 shadow-md border text-white text-sm font-medium rounded-md hover:bg-orange-600 transition duration-300 mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto">
+    Filter
+  </button>
+</div>
+
 
       {/* Table section */}
       <div className="overflow-x-auto shadow-md rounded-lg ">
