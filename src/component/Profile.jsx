@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-
+import { useSelector} from "react-redux";
 const Profile = () => {
   const [hovered, setHovered] = useState(null);
-  const [showMore, setShowMore] = useState(false); // State to control the "See More" feature
+  const [showMore, setShowMore] = useState(false);
+  const {currentuser}=useSelector(state=>state.user)
+  
+   
 
   const skillsList = ['JavaScript', 'React', 'Node.js', 'Python', 'SQL'];
 
@@ -17,7 +20,7 @@ const Profile = () => {
               alt="Profile Picture"
               className="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">John Doe</h1>
+            <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">{currentuser===null?'User':currentuser.toUpperCase()}</h1>
             <p className="text-gray-600 dark:text-gray-300">Software Developer</p>
             <button className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300">
               Edit Profile
