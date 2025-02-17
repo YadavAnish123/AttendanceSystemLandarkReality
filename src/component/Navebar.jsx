@@ -12,15 +12,14 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentuser === null) {
+    if (currentuser === null && window.location.pathname !== '/signup') {
       navigate('/login');
     }
   }, [currentuser, navigate]);
+  
   const handleLogout=()=>{
     dispatch(logout()); // Reset Redux state
     navigate("/login"); // Redirect to login page
-    console.log(1)
-
   }
 
   return (

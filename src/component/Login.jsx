@@ -19,7 +19,7 @@ const Login = () => {
     try {
       //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
       //http://127.0.0.1:3000/api/v1/auth/login
-      dispatch(signInStart)
+      dispatch(signInStart())
       const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login', {
         method: 'Post', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -98,13 +98,14 @@ const Login = () => {
 
         <p className="text-red-500">{error}</p>
         <footer>
-          <div className="flex justify-between w-full text-sm">
+          <div className="flex justify-between w-full text-sm gap-x-6">
+          <a className="text-indigo-700 hover:text-pink-700" href="/signup">
+              Create Account
+            </a>
             <a className="text-indigo-700 hover:text-pink-700" href="#">
               Forgot Password?
             </a>
-            <a className="text-indigo-700 hover:text-pink-700" href="/signup">
-              Create Account
-            </a>
+            
           </div>
         </footer>
       </div>

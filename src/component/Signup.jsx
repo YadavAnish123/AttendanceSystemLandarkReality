@@ -1,9 +1,48 @@
-import React from 'react';
+import React,{ useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { signInStart, signInFailure, signInSucess } from "../reduxStore/authSlice";
 
 const Signup = () => {
+  const [formData, setFormData] = useState({ name: "",email: "", phone:"",password: "" });
+   const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user)
+  
+    const navigate = useNavigate()
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(formData)
+  
+      try {
+        //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
+        //http://127.0.0.1:3000/api/v1/auth/login
+       dispatch(signInStart())
+        const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/register', {
+          method: 'Post', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+  
+        })
+        const d = await res.json();
+      if (d.status == false) {
+        dispatch(signInFailure(d.message))
+        return;
+       }
+      dispatch(signInSucess(d.data.user.name));
+       navigate('/')
+       
+  
+      } catch (error) {
+       dispatch(signInFailure(error.message))
+      }
+    };
+
   return (
     <main className="flex flex-col md:flex-row min-h-screen">
-      <div className="bg-blue-400 w-full md:w-1/2 flex items-center justify-center p-6">
+      <div className=" w-full md:w-1/2 flex items-center justify-center p-6">
         {/* Left Section - Image or Placeholder Text */}
         <p className="text-xl font-semibold text-white hidden md:block">Image</p>
       </div>
@@ -18,6 +57,10 @@ const Signup = () => {
             <input
               type="text"
               id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
               placeholder="Full Name"
               className="w-full mt-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
             />
@@ -29,6 +72,10 @@ const Signup = () => {
             <input
               type="email"
               id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
               placeholder="Email"
               className="w-full mt-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
             />
@@ -40,6 +87,10 @@ const Signup = () => {
             <input
               type="tel"
               id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
               placeholder="Phone Number"
               className="w-full mt-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
             />
@@ -51,15 +102,26 @@ const Signup = () => {
             <input
               type="password"
               id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
               placeholder="Password"
               className="w-full mt-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
             />
           </div>
 
           {/* Signup Button */}
-          <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            Sign Up
-          </button>
+          <button
+              className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded"
+              type="submit"
+              disabled={loading}
+              onClick={handleSubmit}
+            >
+              {loading ? "Signing in..." : "Sign In"}
+
+            </button>
+         {error&& <p className="text-red-500">{error}</p>}
 
           {/* Login Link */}
           <div className="flex justify-center text-sm mt-4">
