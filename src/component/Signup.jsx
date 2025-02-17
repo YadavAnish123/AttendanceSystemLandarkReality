@@ -1,44 +1,44 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signInStart, signInFailure, signInSucess } from "../reduxStore/authSlice";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({ name: "",email: "", phone:"",password: "" });
-   const dispatch = useDispatch();
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "" });
+  const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.user)
-  
-    const navigate = useNavigate()
+
+  const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(formData)
-  
-      try {
-        //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
-        //http://127.0.0.1:3000/api/v1/auth/login
-       dispatch(signInStart())
-        const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/register', {
-          method: 'Post', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-  
-        })
-        const d = await res.json();
+    e.preventDefault();
+    console.log(formData)
+
+    try {
+      //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
+      //http://127.0.0.1:3000/api/v1/auth/login
+      dispatch(signInStart())
+      const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/register', {
+        method: 'Post', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+
+      })
+      const d = await res.json();
       if (d.status == false) {
         dispatch(signInFailure(d.message))
         return;
-       }
-      dispatch(signInSucess(d.data.user.name));
-       navigate('/')
-       
-  
-      } catch (error) {
-       dispatch(signInFailure(error.message))
       }
-    };
+      dispatch(signInSucess(d.data.user.name));
+      navigate('/')
+
+
+    } catch (error) {
+      dispatch(signInFailure(error.message))
+    }
+  };
 
   return (
     <main className="flex flex-col md:flex-row min-h-screen">
@@ -113,19 +113,22 @@ const Signup = () => {
 
           {/* Signup Button */}
           <button
-              className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded"
-              type="submit"
-              disabled={loading}
-              onClick={handleSubmit}
-            >
-              {loading ? "Signing in..." : "Sign In"}
+            className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded"
+            type="submit"
+            disabled={loading}
+            onClick={handleSubmit}
+          >
+            {loading ? "Signing in..." : "Sign In"}
 
-            </button>
-         {error&& <p className="text-red-500">{error}</p>}
+          </button>
+          {error && <p className="text-red-500">{error}</p>}
 
           {/* Login Link */}
           <div className="flex justify-center text-sm mt-4">
-            <p>Already have an account? <a href="/login" className="text-blue-500 hover:underline">Login</a></p>
+            <p>
+              Already have an account?
+              <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
+            </p>
           </div>
         </div>
       </div>
