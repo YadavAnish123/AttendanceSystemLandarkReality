@@ -44,7 +44,7 @@ const Login = () => {
       <div className="w-full md:w-1/2 bg-indigo-50 flex justify-center items-center p-4">
         <img
           className="w-3/4 object-cover hidden md:block"
-          src="https://img.icons8.com/fluent/344/year-of-tiger.png"
+          src="src\assets\logo2.png"
           alt="Logo"
         />
       </div>

@@ -30,9 +30,12 @@ const Navbar = () => {
         </div>
         <nav className="hidden md:flex space-x-6 text-sm font-medium">
           <Link to="/" className="text-gray-700 hover:text-purple-600 transition">Home</Link>
+          <Link to="/homeuser" className="text-gray-700 hover:text-purple-600 transition">HomeUser</Link>
           <Link to="/dashboard" className="text-gray-700 hover:text-purple-600 transition">Dashboard</Link>
           <Link to="/empmanage" className="text-gray-700 hover:text-purple-600 transition">Employee Management</Link>
+          <Link to="/salary" className="text-gray-700 hover:text-purple-600 transition">Salary</Link>
           <Link to="/profile" className="text-gray-700 hover:text-purple-600 transition">Profile</Link>
+        
         </nav>
         <div className="hidden md:flex space-x-3">
           {currentuser ? (
@@ -62,9 +65,12 @@ const Navbar = () => {
             </button>
             <nav className="mt-5 flex flex-col space-y-3 text-sm">
               <Link to="/" className="text-gray-700 hover:text-purple-600" onClick={() => setSidebarOpen(false)}>Home</Link>
+              <Link to="/homeuser" className="text-gray-700 hover:text-purple-600 transition">HomeUser</Link>
               <Link to="/dashboard" className="text-gray-700 hover:text-purple-600" onClick={() => setSidebarOpen(false)}>Dashboard</Link>
               <Link to="/empmanage" className="text-gray-700 hover:text-purple-600" onClick={() => setSidebarOpen(false)}>Employee Management</Link>
+              <Link to="/salary" className="text-gray-700 hover:text-purple-600 transition">Salary</Link>
               <Link to="/profile" className="text-gray-700 hover:text-purple-600" onClick={() => setSidebarOpen(false)}>Profile</Link>
+            
             </nav>
             <div className="mt-auto flex flex-col space-y-3">
               {currentuser ? (

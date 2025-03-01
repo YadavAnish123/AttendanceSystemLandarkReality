@@ -131,7 +131,7 @@ const EmployeeManagementPage = () => {
         </div>
 
         {/* Employee Table Section */}
-        <div className="bg-white  dark:bg-gray-800 p-6 rounded-xl shadow-2xl sm:ml-[calc(33.333%+2rem)] ">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-2xl sm:ml-[calc(33.333%+2rem)]">
           <h2 className="text-sm font-bold text-indigo-800 dark:text-white mb-2">
             Employee List
           </h2>

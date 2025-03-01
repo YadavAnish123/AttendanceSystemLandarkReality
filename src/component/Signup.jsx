@@ -42,10 +42,16 @@ const Signup = () => {
 
   return (
     <main className="flex flex-col md:flex-row min-h-screen">
-      <div className=" w-full md:w-1/2 flex items-center justify-center p-6">
+      
         {/* Left Section - Image or Placeholder Text */}
-        <p className="text-xl font-semibold text-white hidden md:block">Image</p>
+        <div className="w-full md:w-1/2 bg-indigo-50 flex justify-center items-center p-4">
+        <img
+          className="w-3/4 object-cover hidden md:block"
+          src="src\assets\logo2.png"
+          alt="Logo"
+        />
       </div>
+     
 
       <div className="w-full md:w-1/2 bg-white h-full flex flex-col items-center justify-center px-6 py-4">
         {/* Right Section */}

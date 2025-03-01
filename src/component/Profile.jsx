@@ -23,7 +23,7 @@ const Profile = () => {
             <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">{currentuser===null?'User':currentuser.toUpperCase()}</h1>
             <p className="text-gray-600 dark:text-gray-300">Software Developer</p>
             <button className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300">
-              Edit Profile
+            Edit Profile
             </button>
           </div>
 
