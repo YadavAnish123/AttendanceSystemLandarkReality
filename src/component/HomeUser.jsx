@@ -57,7 +57,7 @@ const HomeUser = () => {
           body: raw,
           redirect: "follow"
         };
-        fetch("http://127.0.0.1:3000/api/v1/auth/mark-attendance", requestOptions)
+        fetch("https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/mark-attendance", requestOptions)
           .then(response => response.json())
           .then(result => {
             console.log("Attendance Response:", result);
@@ -90,7 +90,9 @@ const HomeUser = () => {
           body: raw,
           redirect: "follow"
         };
-      const response = await fetch("http://127.0.0.1:3000/api/v1/auth/mark-attendance", requestOptions);
+       // http://127.0.0.1:3000/api/v1/auth/mark-attendance
+        //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
+      const response = await fetch("https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/mark-attendance", requestOptions);
 
       const result = await response.json();
      

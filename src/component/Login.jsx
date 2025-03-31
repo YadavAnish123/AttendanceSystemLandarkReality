@@ -20,7 +20,7 @@ const Login = () => {
       //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
       //http://127.0.0.1:3000/api/v1/auth/login
       dispatch(signInStart())
-      const res = await fetch('http://127.0.0.1:3000/api/v1/auth/login',  {
+      const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login',  {
         method: 'Post', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
      
