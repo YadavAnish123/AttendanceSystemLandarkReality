@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { currentuser: null, error: null, loading: false };
+const initialState = { currentuser: null, token: null,error: null, loading: false, ischeckedIn: false,lastcheckInTime: null,lastcheckOutTime:null};
 
 const userSlice = createSlice({
   name: "user",
@@ -9,7 +9,8 @@ const userSlice = createSlice({
       state.loading = true;
     },
     signInSucess: (state, action) => {
-      (state.currentuser = action.payload),
+      (state.currentuser = action.payload.name),
+      (state.token=action.payload.token),
         (state.loading = false),
         (state.error = null);
     },
@@ -19,14 +20,24 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.currentuser = null;
+      state.token=null
       state.error = null;
       state.loading = false;
       localStorage.removeItem("user"); // Clear user from local storage
     },
+    checkIn: (state,action) => {
+      state.ischeckedIn = true;
+      state.lastcheckInTime = action.payload.lastcheckInTime;
+    },
+    checkOut: (state,action) => {
+      state.ischeckedIn = false;
+      state.checkInTime = null;
+      state.lastcheckOutTime=action.payload.lastcheckOutTime;
+    },
   },
 });
 
-export const{signInStart,signInFailure,signInSucess,logout}=userSlice.actions;
+export const{signInStart,signInFailure,signInSucess,logout,checkIn,checkOut}=userSlice.actions;
 export default userSlice.reducer
 
 // Define async thunk for login

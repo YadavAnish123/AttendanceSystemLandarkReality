@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { signInStart, signInFailure, signInSucess } from "../reduxStore/authSlice";
+import { signInStart, signInFailure, signInSucess,checkIn,checkOut } from "../reduxStore/authSlice";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -20,9 +20,10 @@ const Login = () => {
       //https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login
       //http://127.0.0.1:3000/api/v1/auth/login
       dispatch(signInStart())
-      const res = await fetch('https://attendancesystemlandmarkrealtybackend.onrender.com/api/v1/auth/login', {
+      const res = await fetch('http://127.0.0.1:3000/api/v1/auth/login',  {
         method: 'Post', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
+     
 
       })
       const d = await res.json();
@@ -30,7 +31,10 @@ const Login = () => {
         dispatch(signInFailure(d.message))
         return;
       }
-      dispatch(signInSucess(d.data.user.name));
+     // console.log("Looking for token "+d.data.user.token);
+      dispatch(signInSucess(d.data.user));
+      dispatch(checkIn(d.data.user));
+      dispatch(checkOut(d.data.user))
       navigate('/')
 
     } catch (error) {
